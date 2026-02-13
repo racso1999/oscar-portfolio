@@ -1,110 +1,181 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import ProjectCard from "./components/ProjectCard";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Home() {
-  const projects = Array.from({ length: 6 });
-  const [hovered, setHovered] = useState<number | null>(null);
+/* ===============================
+   TERMINAL ENTRY
+================================ */
+
+function Terminal({ onEnter }: { onEnter: () => void }) {
+  const [input, setInput] = useState("");
+  const [lines, setLines] = useState([
+    "OscarOS v1.0",
+    "Access portfolio?",
+    "Type 'yes' to continue."
+  ]);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    setLines(prev => [...prev, `> ${input}`]);
+
+    if (input.toLowerCase() === "yes") {
+      setLines(prev => [...prev, "Access granted..."]);
+      setTimeout(onEnter, 900);
+    } else {
+      setLines(prev => [...prev, "Access denied."]);
+    }
+
+    setInput("");
+  }
 
   return (
-    <main className="relative min-h-screen bg-[#070707] text-white px-6 md:px-16 py-12 overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-white/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-neutral-500/10 blur-[120px] rounded-full" />
+    <motion.div
+      className="fixed inset-0 bg-black flex items-center justify-center text-green-400 font-mono"
+      initial={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        scale: 1.4,
+        filter: "blur(40px)"
+      }}
+      transition={{ duration: 1 }}
+    >
+      <div className="w-[720px] max-w-[92%] bg-[#050505] border border-green-500/20 rounded-xl p-6 shadow-2xl">
+        {lines.map((line, i) => (
+          <div key={i}>{line}</div>
+        ))}
+
+        <form onSubmit={handleSubmit} className="flex gap-2 mt-2">
+          <span>&gt;</span>
+          <input
+            autoFocus
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            className="bg-transparent outline-none flex-1"
+          />
+        </form>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ===============================
+   LIQUID GLASS PROJECT CARD
+================================ */
+
+function GlassCard({ title }: { title: string }) {
+  return (
+    <motion.div
+      whileHover={{ y: -6, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className="
+        backdrop-blur-2xl
+        bg-white/[0.05]
+        border border-white/10
+        rounded-3xl
+        p-6
+        shadow-xl
+        hover:bg-white/[0.08]
+        transition
+      "
+    >
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p className="text-neutral-400 mt-2 text-sm">
+        Clean architecture. Efficient systems. Intelligent software.
+      </p>
+    </motion.div>
+  );
+}
+
+/* ===============================
+   MAIN PORTFOLIO UI
+================================ */
+
+function PortfolioUI() {
+  const projects = [
+    "MLAPS Cryptography System",
+    "Card Simulation Engine",
+    "Neural Network Experiments",
+    "Java Concurrency Visualiser",
+    "SQL Analytics Toolkit",
+    "Portfolio OS"
+  ];
+
+  return (
+    <motion.main
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className="relative min-h-screen bg-[#070707] text-white px-6 md:px-16 py-16 overflow-hidden"
+    >
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white/5 blur-[160px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-neutral-500/10 blur-[140px] rounded-full" />
       </div>
 
-      {/* Hero */}
-      <section className="relative max-w-4xl mx-auto mb-32">
+      {/* HERO */}
+      <section className="max-w-4xl mx-auto mb-28 relative">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-5xl md:text-7xl font-semibold tracking-tight mb-6 bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent"
+          transition={{ delay: 0.2 }}
+          className="
+            text-6xl md:text-7xl
+            font-semibold
+            tracking-tight
+            bg-gradient-to-r from-white to-neutral-500
+            bg-clip-text text-transparent
+          "
         >
           Oscar Jones
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="text-lg md:text-xl text-neutral-400 max-w-2xl"
-        >
-          Computer Science MSc student building clean, efficient systems and intelligent software.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-          className="mt-10 flex gap-4"
-        >
-          <Link
-            href="#projects"
-            className="px-6 py-3 rounded-2xl bg-white text-black text-sm hover:scale-105 active:scale-95 transition-transform duration-200 shadow-lg shadow-white/10"
-          >
-            View Projects
-          </Link>
-
-          <Link
-            href="#contact"
-            className="px-6 py-3 rounded-2xl border border-neutral-700 text-sm backdrop-blur-xl bg-white/5 hover:bg-white/10 transition"
-          >
-            Contact
-          </Link>
-        </motion.div>
+        <p className="text-neutral-400 text-lg mt-6 max-w-2xl">
+          Computer Science MSc student building clean, efficient systems
+          and intelligent software.
+        </p>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="relative max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-semibold mb-14 tracking-tight"
-        >
+      {/* PROJECTS */}
+      <section className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-semibold mb-12 tracking-tight">
           Selected Projects
-        </motion.h2>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((_, index) => (
-            <ProjectCard
-              key={index}
-              title={`Project ${index + 1}`}
-            />
+          {projects.map((p, i) => (
+            <GlassCard key={i} title={p} />
           ))}
         </div>
       </section>
 
-      {/* Contact */}
-      <section
-        id="contact"
-        className="relative max-w-4xl mx-auto mt-36 pt-12 border-t border-white/10"
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-semibold mb-6 tracking-tight"
-        >
-          Contact
-        </motion.h2>
-
-        <p className="text-neutral-400 mb-4">
-          Replace this section with your email, LinkedIn, and GitHub.
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative max-w-6xl mx-auto mt-24 pt-12 border-t border-white/10 text-sm text-neutral-600">
-        © {new Date().getFullYear()} Oscar Jones. All rights reserved.
+      {/* FOOTER */}
+      <footer className="max-w-6xl mx-auto mt-28 pt-10 border-t border-white/10 text-neutral-600 text-sm">
+        © {new Date().getFullYear()} Oscar Jones
       </footer>
-    </main>
+    </motion.main>
   );
 }
+
+/* ===============================
+   PAGE CONTROLLER
+================================ */
+
+export default function Home() {
+  const [entered, setEntered] = useState(false);
+
+  return (
+    <div className="bg-black">
+      <AnimatePresence mode="wait">
+        {!entered ? (
+          <Terminal key="terminal" onEnter={() => setEntered(true)} />
+        ) : (
+          <PortfolioUI key="portfolio" />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
