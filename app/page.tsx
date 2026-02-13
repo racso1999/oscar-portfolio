@@ -1,65 +1,110 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import ProjectCard from "./components/ProjectCard";
 
 export default function Home() {
+  const projects = Array.from({ length: 6 });
+  const [hovered, setHovered] = useState<number | null>(null);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="relative min-h-screen bg-[#070707] text-white px-6 md:px-16 py-12 overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-white/5 blur-[140px] rounded-full" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-neutral-500/10 blur-[120px] rounded-full" />
+      </div>
+
+      {/* Hero */}
+      <section className="relative max-w-4xl mx-auto mb-32">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-5xl md:text-7xl font-semibold tracking-tight mb-6 bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent"
+        >
+          Oscar Jones
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="text-lg md:text-xl text-neutral-400 max-w-2xl"
+        >
+          Computer Science MSc student building clean, efficient systems and intelligent software.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.7 }}
+          className="mt-10 flex gap-4"
+        >
+          <Link
+            href="#projects"
+            className="px-6 py-3 rounded-2xl bg-white text-black text-sm hover:scale-105 active:scale-95 transition-transform duration-200 shadow-lg shadow-white/10"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            View Projects
+          </Link>
+
+          <Link
+            href="#contact"
+            className="px-6 py-3 rounded-2xl border border-neutral-700 text-sm backdrop-blur-xl bg-white/5 hover:bg-white/10 transition"
+          >
+            Contact
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="relative max-w-6xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-semibold mb-14 tracking-tight"
+        >
+          Selected Projects
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((_, index) => (
+            <ProjectCard
+              key={index}
+              title={`Project ${index + 1}`}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Contact */}
+      <section
+        id="contact"
+        className="relative max-w-4xl mx-auto mt-36 pt-12 border-t border-white/10"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-semibold mb-6 tracking-tight"
+        >
+          Contact
+        </motion.h2>
+
+        <p className="text-neutral-400 mb-4">
+          Replace this section with your email, LinkedIn, and GitHub.
+        </p>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative max-w-6xl mx-auto mt-24 pt-12 border-t border-white/10 text-sm text-neutral-600">
+        © {new Date().getFullYear()} Oscar Jones. All rights reserved.
+      </footer>
+    </main>
   );
 }
