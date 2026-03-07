@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { MapPin, Mail, Briefcase } from 'lucide-react';
+import { MapPin, Briefcase } from 'lucide-react';
 import profileImage from '../../assets/new_profile.jpg';
 
 export function About() {
