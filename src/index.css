@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.language-sql {
-  color: inherit;
-}
-
 pre[class*='language-'] {
   background: #0b0b0b;
   color: #f5f5f5;
@@ -16,38 +12,11 @@ pre[class*='language-'] {
 
 pre[class*='language-'] code {
   text-shadow: none;
+  color: #f5f5f5;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: #7d7d7d;
-}
-
-.token.punctuation {
-  color: #e5e5e5;
-}
-
-.token.operator,
-.token.keyword,
-.token.builtin {
-  color: #00f5ff;
-}
-
-.token.string,
-.token.char,
-.token.attr-value {
-  color: #ff5af7;
-}
-
-.token.number {
-  color: #ffe156;
-}
-
-.token.function,
-.token.class-name {
-  color: #7cff6b;
+pre[class*='language-'] .token {
+  color: #f5f5f5 !important;
 }
 
 @layer base {

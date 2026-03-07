@@ -132,13 +132,6 @@ function App() {
               >
                 About
               </a>
-              <a
-                href="#contact"
-                onClick={handleAnchorClick}
-                className="text-sm px-4 py-2 bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors"
-              >
-                Contact
-              </a>
             </div>
           </div>
         </div>
@@ -176,125 +169,7 @@ function App() {
         )}
       </main>
 
-      {/* Custom Cursor (desktop only) */}
-      <CustomCursor isLoaded={isLoaded} />
     </div>
-  );
-}
-
-// Custom Cursor Component
-function CustomCursor({ isLoaded }: { isLoaded: boolean }) {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorDotRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  useEffect(() => {
-    // Detect touch device
-    const checkTouch = () => {
-      setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches);
-    };
-    checkTouch();
-    window.addEventListener('resize', checkTouch);
-
-    return () => window.removeEventListener('resize', checkTouch);
-  }, []);
-
-  useEffect(() => {
-    if (isTouchDevice) return;
-
-    const cursor = cursorRef.current;
-    const dot = cursorDotRef.current;
-    if (!cursor || !dot) return;
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const animate = () => {
-      // Smooth follow
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-
-      cursor.style.transform = `translate(${cursorX - 20}px, ${cursorY - 20}px)`;
-      dot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
-
-      requestAnimationFrame(animate);
-    };
-
-    // Detect hoverable elements
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.classList.contains('card-hover')
-      ) {
-        setIsHovering(true);
-      }
-    };
-
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.classList.contains('card-hover')
-      ) {
-        setIsHovering(false);
-      }
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
-
-    const rafId = requestAnimationFrame(animate);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseout', handleMouseOut);
-      cancelAnimationFrame(rafId);
-    };
-  }, [isTouchDevice]);
-
-  if (isTouchDevice) return null;
-
-  return (
-    <>
-      {/* Outer ring */}
-      <div
-        ref={cursorRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border pointer-events-none z-[100] mix-blend-difference hidden md:block"
-        style={{
-          borderColor: isHovering ? '#3b82f6' : 'rgba(255, 255, 255, 0.5)',
-          transform: 'translate(-50%, -50%)',
-          transition: 'border-color 0.2s ease, width 0.2s ease, height 0.2s ease',
-          width: isHovering ? '50px' : '40px',
-          height: isHovering ? '50px' : '40px',
-          opacity: isLoaded ? 1 : 0,
-        }}
-      />
-      {/* Inner dot */}
-      <div
-        ref={cursorDotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-white pointer-events-none z-[100] mix-blend-difference hidden md:block"
-        style={{
-          opacity: isLoaded ? 1 : 0,
-        }}
-      />
-    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { MapPin, Mail, Briefcase } from 'lucide-react';
-import profileImage from '../../assets/profile.png';
+import profileImage from '../../assets/new_profile.jpg';
 
 export function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -84,10 +84,10 @@ export function About() {
               transition: 'all 0.8s ease 0.2s',
             }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
               Building systems
               <span
-                className="block"
+                className="block leading-tight"
                 style={{
                   background: 'linear-gradient(135deg, #888 0%, #888 100%)',
                   WebkitBackgroundClip: 'text',

@@ -1,9 +1,16 @@
 import { useRef, useEffect, useState } from 'react';
-import { Github, Linkedin } from 'lucide-react';
 
-export function Contact() {
+interface ContactProps {
+  githubUrl?: string;
+}
+
+export function Contact({ githubUrl }: ContactProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const githubHref = githubUrl ?? 'https://github.com/racso1999';
+  const githubText = githubHref
+    .replace(/^https?:\/\//, '')
+    .replace(/^www\./, '');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,72 +33,40 @@ export function Contact() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-12 md:py-16 min-h-screen flex items-center"
+      className="relative py-8 md:py-10"
     >
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 w-full">
         <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at center bottom, rgba(255, 255, 255, 0.05) 0%, transparent 60%)',
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto px-4 w-full">
-        {/* Section Header */}
-        <div
-          className="relative"
+          className="border-t border-border pt-6 md:pt-8"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: `translateY(${isVisible ? 0 : 30}px)`,
+            transform: `translateY(${isVisible ? 0 : 12}px)`,
             transition: 'all 0.8s ease',
           }}
         >
-          <div className="rounded-2xl border border-border bg-card/60 p-10 text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-              Contact
-            </h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-sm md:text-base text-muted-foreground">
             <a
               href="mailto:jones.oscar.work@outlook.com"
-              className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               jones.oscar.work@outlook.com
             </a>
-          </div>
-        </div>
-
-        {/* Social Links */}
-        <div
-          className="mt-16 pt-8 border-t border-border"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.8s ease 0.5s',
-          }}
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm text-muted-foreground">
-              © 2026 Oscar Jones. Built with React.
-            </p>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="https://github.com/racso1999"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-card border border-border rounded-full text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/oscar-jones-91b349294"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-card border border-border rounded-full text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <a
+              href={githubHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              {githubText}
+            </a>
+            <a
+              href="https://www.linkedin.com/in/oscar-jones-91b349294"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              linkedin.com/in/oscar-jones-91b349294
+            </a>
           </div>
         </div>
       </div>

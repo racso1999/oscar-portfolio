@@ -1,13 +1,13 @@
 import droneVideo from '../assets/drone.mov';
 import cropDatabasePdf from '../assets/crop-data-sql-database.pdf';
-import cropDatabaseImage from '../assets/crop-data-sql-database.png';
-import wasteRoutingImage from '../assets/greedy-waste-routing.jpg';
+import applioUmlImage from '../assets/applio-uml.svg';
 
 export interface Project {
   title: string;
   slug: string;
   description: string;
   technologies: string[];
+  githubUrl?: string;
   imageUrl?: string;
   videoUrl?: string;
   pdfUrl?: string;
@@ -20,10 +20,20 @@ export const projects: Project[] = [
   //   slug: 'project-slug',
   //   description: 'Main project description...',
   //   technologies: ['Tech 1', 'Tech 2'],
+  //   githubUrl: 'https://github.com/username/repository',
   //   imageUrl: 'https://... or imported asset',
   //   videoUrl: optional,
   //   pdfUrl: optional,
   // },
+  {
+    title: 'Agentic Application System',
+    slug: 'agentic-application-system',
+    description:
+      'A proof-of-concept autonomous multi-agent workflow that discovers, scores, documents, and submits applications while exposing how broken high-volume hiring loops can become.',
+    technologies: ['FastAPI', 'Next.js 14', 'LiteLLM', 'Playwright', 'aiosqlite', 'Docker'],
+    githubUrl: 'https://github.com/racso1999/applio',
+    imageUrl: applioUmlImage,
+  },
   {
     title: 'Crop Data SQL Database',
     slug: 'crop-data-sql-database',
@@ -31,7 +41,6 @@ export const projects: Project[] = [
       'Designed a relational database and companion REST API for crop data, documenting schema decisions, normalization choices, and the tradeoffs between SQL and document-based models.',
     technologies: ['SQL', 'Database Design', 'API Design', 'Data Modeling'],
     pdfUrl: cropDatabasePdf,
-    imageUrl: cropDatabaseImage,
   },
   {
     title: 'Autonomous Drone System',
@@ -40,12 +49,10 @@ export const projects: Project[] = [
       'This is one of those projects that I\'ve always wanted to do but felt I never had the skillset to achieve. However, after one year of learning Python, I decided with a university colleague to give it a try. We purchased a cheap drone off eBay and began programming.\n\nTo begin with, we started simple. We loaded YOLOv8 for object detection and added some simple commands for it to turn away from any detected objects. We then moved on to generating actionable hardware instructions from natural language commands.\n\nCurrently, we have a few models running on the drone, including YOLOv8 for object detection. This helps the drone begin to understand its surroundings. We also have a link to Groq, which allows the drone to take natural language input and generate commands on the fly for the drone to execute. For example: "fly around the room for 2 minutes and then come home."\n\nThis project has advanced my confidence in developing real-time algorithms and software-hardware interaction. Working alongside another engineer has also been a positive change, whereby I\'ve been able to develop my appreciation for sharing work load and working to each other\'s unique abilities. We collaborate mainly through Git, working on separate branches and merging successful features.\n\nNext up is a return-to-charge feature. The plan is to 3D-print a station that the drone can land on and wirelessly charge from, moving the system towards fully autonomous, continuously operating behaviour.',
     technologies: ['Python', 'Control Systems', 'Machine Learning', 'Robotics'],
     videoUrl: droneVideo,
-    imageUrl:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
   },
   {
     title: 'Greedy Waste Routing Optimizer',
-    slug: 'ai-job-application-agentic-system',
+    slug: 'greedy-waste-routing-optimizer',
     description:
       `Efficient waste management is a logistical challenge that directly impacts urban sustainability, operational costs, and public health. To address this, I developed a greedy heuristic algorithm designed to optimize truck routing for municipal waste collection across a dynamic city grid.
 
@@ -57,6 +64,7 @@ export const projects: Project[] = [
 
     This project deepened my understanding of combinatorial optimization, graph traversal, and the practical trade-offs involved in applying algorithmic solutions to public infrastructure problems.`,
     technologies: ['Optimization', 'Algorithms', 'Heuristics', 'Graph Theory'],
-    imageUrl: wasteRoutingImage,
+    githubUrl: 'https://github.com/racso1999/greedy_waste_algorithm',
   },
 ];
+
