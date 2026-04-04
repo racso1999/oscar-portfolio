@@ -2,6 +2,11 @@ import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '../../data/projects';
 
+const uploadDateFormatter = new Intl.DateTimeFormat('en-GB', {
+  month: 'short',
+  year: 'numeric',
+});
+
 interface TimelineProps {
   onOpenProject: (slug: string) => void;
 }
@@ -35,16 +40,17 @@ export function Timeline({ onOpenProject }: TimelineProps) {
       {/* Project List */}
       <div className="max-w-6xl mx-auto px-4">
         <div className="overflow-hidden rounded-xl border border-border">
-          <div className="hidden md:grid md:grid-cols-[2fr_3fr_1fr] px-5 py-3 bg-card/60 border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
+          <div className="hidden md:grid md:grid-cols-[2fr_3fr_1fr_1fr] px-5 py-3 bg-card/60 border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
             <span>Project</span>
             <span>Stack</span>
+            <span>Uploaded</span>
             <span className="text-right">GitHub</span>
           </div>
 
           {projects.map((project, index) => (
             <div
               key={project.slug}
-              className="grid md:grid-cols-[2fr_3fr_1fr] gap-3 md:gap-4 px-4 md:px-5 py-4 border-b border-border last:border-b-0 hover:bg-card/40 transition-colors"
+              className="grid md:grid-cols-[2fr_3fr_1fr_1fr] gap-3 md:gap-4 px-4 md:px-5 py-4 border-b border-border last:border-b-0 hover:bg-card/40 transition-colors"
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: `translateY(${isVisible ? 0 : 14}px)`,
@@ -61,6 +67,10 @@ export function Timeline({ onOpenProject }: TimelineProps) {
 
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {project.technologies.join(' • ')}
+              </p>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {uploadDateFormatter.format(new Date(project.uploadedAt))}
               </p>
 
               {project.githubUrl ? (
