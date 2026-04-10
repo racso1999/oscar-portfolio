@@ -74,7 +74,7 @@ jobs:
           GHCR_READ_TOKEN: ${{ secrets.GHCR_READ_TOKEN }}
           GHCR_READ_USERNAME: ${{ secrets.GHCR_READ_USERNAME }}
         run: |
-          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" /bin/sh <<EOF
+          ssh -o IdentitiesOnly=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" /bin/sh <<EOF
           set -eu
 
           docker_config=''
