@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: cd-main
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: write
@@ -52,12 +56,17 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
 
-      - name: Add deploy host to known_hosts
-        run: ssh-keyscan -p "${{ secrets.DEPLOY_PORT }}" "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+      - name: Add pinned deploy host key
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_HOST_KEY }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
       - name: Deploy on VPS
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_HOST_KEY: ${{ secrets.DEPLOY_HOST_KEY }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
@@ -68,15 +77,24 @@ jobs:
           ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" /bin/sh <<EOF
           set -eu
 
+          docker_config=''
           if [ -n "${GHCR_READ_USERNAME:-}" ] && [ -n "${GHCR_READ_TOKEN:-}" ]; then
-            printf '%s' "$GHCR_READ_TOKEN" | docker login ghcr.io -u "$GHCR_READ_USERNAME" --password-stdin
+            docker_config="$(mktemp -d)"
+            trap 'rm -rf "$docker_config"' EXIT
+            printf '%s' "$GHCR_READ_TOKEN" | docker --config "$docker_config" login ghcr.io -u "$GHCR_READ_USERNAME" --password-stdin
           fi
 
           if grep -q 'racso1999/portfolio:linuxamd64' "$DEPLOY_PATH/docker-compose.yml"; then
             sed -i "s|racso1999/portfolio:linuxamd64|$GHCR_IMAGE:latest|g" "$DEPLOY_PATH/docker-compose.yml"
           fi
 
-          docker compose -f "$DEPLOY_PATH/docker-compose.yml" pull app
-          docker compose -f "$DEPLOY_PATH/docker-compose.yml" up -d app
+          if [ -n "$docker_config" ]; then
+            docker --config "$docker_config" compose -f "$DEPLOY_PATH/docker-compose.yml" pull app
+            docker --config "$docker_config" compose -f "$DEPLOY_PATH/docker-compose.yml" up -d app
+          else
+            docker compose -f "$DEPLOY_PATH/docker-compose.yml" pull app
+            docker compose -f "$DEPLOY_PATH/docker-compose.yml" up -d app
+          fi
+
           docker image prune -f
           EOF
