@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Oscar Portfolio
 
-## Getting Started
+This repo is a Next.js portfolio app exported as static files and served from an Nginx container.
 
-First, run the development server:
+## Local Development
+
+Install dependencies and start the dev server:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## CI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GitHub Actions runs:
 
-## Learn More
+- `npm ci`
+- `npm run lint`
+- `npm run build`
 
-To learn more about Next.js, take a look at the following resources:
+## CD
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+On pushes to `main`, GitHub Actions:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Builds the production container image
+2. Pushes it to GitHub Container Registry
+3. Connects to the VPS over SSH
+4. Runs `docker compose pull` and `docker compose up -d` in the deploy directory
 
-## Deploy on Vercel
+## Required Repository Secrets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `DEPLOY_HOST`: VPS hostname or IP
+- `DEPLOY_PORT`: SSH port, usually `22`
+- `DEPLOY_USER`: deploy account, intended to be `deployer`
+- `DEPLOY_PATH`: directory containing `docker-compose.yml`
+- `DEPLOY_SSH_PRIVATE_KEY`: private key for the deploy account
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optional, only if the GHCR image remains private:
+
+- `GHCR_READ_USERNAME`
+- `GHCR_READ_TOKEN`
+
+## Server Deploy Path
+
+The deployer-safe compose project path is `/home/deployer/oscar-portfolio`.
