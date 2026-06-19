@@ -1,10 +1,3 @@
-import { blogPosts } from '../../data/blog';
-
-const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
 
 interface BlogProps {
   onNavigate: (path: string) => void;
@@ -21,26 +14,7 @@ export function Blog({ onNavigate }: BlogProps) {
           Writing
         </h1>
 
-        <div className="space-y-16">
-          {blogPosts.map((post) => (
-            <article key={post.slug}>
-              <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2">
-                {dateFormatter.format(new Date(post.date))}
-              </p>
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-5">
-                {post.title}
-              </h2>
-              <div className="space-y-4">
-                {post.body.split('\n\n').map((paragraph, i) => (
-                  <p key={i} className="text-muted-foreground leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <div className="mt-8 border-b border-border" />
-            </article>
-          ))}
-        </div>
+        <p className="text-muted-foreground">Coming soon.</p>
 
         <button
           type="button"
