@@ -3,6 +3,7 @@ import { Timeline } from './components/sections/Timeline';
 import { About } from './components/sections/About';
 import { Contact } from './components/sections/Contact';
 import { ProjectDetail } from './components/pages/ProjectDetail';
+import { BlogBubble } from './components/sections/BlogBubble';
 import './App.css';
 
 function App() {
@@ -126,6 +127,13 @@ function App() {
                 Projects
               </a>
               <a
+                href="#blog"
+                onClick={handleAnchorClick}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Blog
+              </a>
+              <a
                 href="#about"
                 onClick={handleAnchorClick}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -151,6 +159,10 @@ function App() {
           <>
             <section id="about">
               <About />
+            </section>
+
+            <section id="blog" className="scroll-mt-20">
+              <BlogBubble onNavigate={navigateTo} />
             </section>
 
             <section id="work">

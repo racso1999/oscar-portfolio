@@ -134,6 +134,11 @@ const PROJECT_EXTRA_CONTENT: Record<string, ProjectExtraContent> = {
         summary:
           'Finalized a permissions and identity hardening pass by aligning service UID handling with mounted data volumes for stable runtime writes.',
       },
+      {
+        uploadedAt: '2026-06-19T00:00:00Z',
+        summary:
+          'Tightening of UI, email tracking fixed.',
+      },
     ],
   },
 };
