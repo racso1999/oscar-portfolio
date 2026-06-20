@@ -24,7 +24,7 @@ pre[class*='language-'] .token {
   }
 
   :root {
-    --background: 0 0% 2%;
+    --background: 150 60% 8%;
     --foreground: 0 0% 100%;
     --card: 0 0% 7%;
     --card-foreground: 0 0% 100%;
