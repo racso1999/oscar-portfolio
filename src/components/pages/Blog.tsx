@@ -1,3 +1,4 @@
+import { blogPosts } from '../../data/blog';
 
 interface BlogProps {
   onNavigate: (path: string) => void;
@@ -14,7 +15,33 @@ export function Blog({ onNavigate }: BlogProps) {
           Writing
         </h1>
 
-        <p className="text-muted-foreground">Coming soon.</p>
+        {blogPosts.length === 0 ? (
+          <p className="text-muted-foreground">Coming soon.</p>
+        ) : (
+          <div className="space-y-16">
+            {blogPosts.map((post) => (
+              <article key={post.slug}>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                  {post.title}
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {new Date(post.date).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+                <div className="space-y-4">
+                  {post.body.split('\n\n').map((paragraph, i) => (
+                    <p key={i} className="text-foreground/90 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
 
         <button
           type="button"
