@@ -95,7 +95,7 @@ export function About() {
                   backgroundClip: 'text',
                 }}
               >
-                driven by data
+                driven by intention
               </span>
             </h2>
 
