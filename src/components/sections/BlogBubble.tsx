@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { blogPosts } from '../../data/blog';
+import { Prompt } from '../term/Prompt';
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -54,15 +55,28 @@ export function BlogBubble({ onNavigate }: BlogBubbleProps) {
             </div>
           ) : (
             <div
-              className="max-h-96 overflow-y-auto px-5 py-5 space-y-8"
               style={{
                 opacity: isVisible ? 1 : 0,
                 transition: 'opacity 0.45s ease',
               }}
             >
+              <div className="flex items-center justify-between border-b border-border px-5 py-3">
+                <Prompt path="~/blog" command="cat" arg="latest.md" />
+                <span
+                  className="text-xs text-muted-foreground"
+                  style={{ fontFamily: 'var(--font-mono)' }}
+                >
+                  {blogPosts.length} {blogPosts.length === 1 ? 'entry' : 'entries'}
+                </span>
+              </div>
+              <div className="max-h-96 overflow-y-auto px-5 py-5 space-y-8">
               {blogPosts.map((post) => (
                 <div key={post.slug}>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+                  <p
+                    className="flex items-center gap-2 text-xs text-muted-foreground mb-1"
+                    style={{ fontFamily: 'var(--font-mono)' }}
+                  >
+                    <span style={{ color: 'var(--term-green)' }}>●</span>
                     {dateFormatter.format(new Date(post.date))}
                   </p>
                   <p className="text-base font-semibold text-foreground mb-3">
@@ -77,6 +91,7 @@ export function BlogBubble({ onNavigate }: BlogBubbleProps) {
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           )}
         </div>

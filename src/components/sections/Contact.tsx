@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { Prompt } from '../term/Prompt';
 
 interface ContactProps {
   githubUrl?: string;
@@ -44,11 +45,21 @@ export function Contact({ githubUrl }: ContactProps) {
             transition: 'all 0.8s ease',
           }}
         >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-sm md:text-base text-muted-foreground">
+          <Prompt
+            path="~"
+            command="contact"
+            arg="--reach-out"
+            className="mb-4 text-center md:text-left"
+          />
+          <div
+            className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 text-sm md:text-base text-muted-foreground"
+            style={{ fontFamily: 'var(--font-mono)' }}
+          >
             <a
               href="mailto:jones.oscar.work@outlook.com"
               className="hover:text-foreground transition-colors"
             >
+              <span style={{ color: 'var(--term-comment)' }}>email: </span>
               jones.oscar.work@outlook.com
             </a>
             <a
@@ -57,6 +68,7 @@ export function Contact({ githubUrl }: ContactProps) {
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors"
             >
+              <span style={{ color: 'var(--term-comment)' }}>git: </span>
               {githubText}
             </a>
             <a
@@ -65,6 +77,7 @@ export function Contact({ githubUrl }: ContactProps) {
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors"
             >
+              <span style={{ color: 'var(--term-comment)' }}>in: </span>
               linkedin.com/in/oscar-jones-91b349294
             </a>
           </div>

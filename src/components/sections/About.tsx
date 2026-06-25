@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { MapPin, Briefcase } from 'lucide-react';
 import profileImage from '../../assets/new_profile.jpg';
+import { Prompt } from '../term/Prompt';
 
 export function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -61,13 +62,19 @@ export function About() {
 
                 {/* Info overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <MapPin className="w-4 h-4" />
-                    <span>UK</span>
+                  <div
+                    className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground mb-2"
+                    style={{ fontFamily: 'var(--font-mono)' }}
+                  >
+                    <MapPin className="w-4 h-4" style={{ color: 'var(--term-green)' }} />
+                    <span>location: UK</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Briefcase className="w-4 h-4" />
-                    <span>Systems Engineering & AI</span>
+                  <div
+                    className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground"
+                    style={{ fontFamily: 'var(--font-mono)' }}
+                  >
+                    <Briefcase className="w-4 h-4" style={{ color: 'var(--term-green)' }} />
+                    <span>focus: Systems Engineering &amp; AI</span>
                   </div>
                 </div>
               </div>
@@ -84,6 +91,8 @@ export function About() {
               transition: 'all 0.8s ease 0.2s',
             }}
           >
+            <Prompt path="~/about" command="whoami" caret className="mb-4" />
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
               Building systems
               <span

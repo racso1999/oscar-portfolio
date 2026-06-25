@@ -107,6 +107,7 @@ function App() {
             <a
               href="#"
               className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              style={{ fontFamily: 'var(--font-mono)' }}
               onClick={(e) => {
                 e.preventDefault();
                 if (currentPath !== '/') {
@@ -115,31 +116,29 @@ function App() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              OSCAR JONES
+              <span style={{ color: 'var(--term-green)' }}>~</span>
+              <span style={{ color: 'var(--term-comment)' }}>/</span>oscar-jones
             </a>
 
-            <div className="hidden md:flex items-center gap-8">
-              <a
-                href="#work"
-                onClick={handleAnchorClick}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Projects
-              </a>
-              <a
-                href="#blog"
-                onClick={handleAnchorClick}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Blog
-              </a>
-              <a
-                href="#about"
-                onClick={handleAnchorClick}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                About
-              </a>
+            <div
+              className="hidden md:flex items-center gap-6 text-sm"
+              style={{ fontFamily: 'var(--font-mono)' }}
+            >
+              {[
+                { href: '#work', label: 'work' },
+                { href: '#blog', label: 'blog' },
+                { href: '#about', label: 'about' },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={handleAnchorClick}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <span style={{ color: 'var(--term-pink)' }}>#</span>
+                  {item.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>

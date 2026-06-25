@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '../../data/projects';
+import { Prompt } from '../term/Prompt';
 
 const uploadDateFormatter = new Intl.DateTimeFormat('en-GB', {
   month: 'short',
@@ -39,12 +40,16 @@ export function Timeline({ onOpenProject }: TimelineProps) {
     >
       {/* Project List */}
       <div className="max-w-6xl mx-auto px-4">
+        <Prompt path="~/projects" command="ls -la" className="mb-4" />
         <div className="overflow-hidden rounded-xl border border-border">
-          <div className="hidden md:grid md:grid-cols-[2fr_3fr_1fr_1fr] px-5 py-3 bg-card/60 border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
-            <span>Project</span>
-            <span>Stack</span>
-            <span>Uploaded</span>
-            <span className="text-right">GitHub</span>
+          <div
+            className="hidden md:grid md:grid-cols-[2fr_3fr_1fr_1fr] px-5 py-3 bg-card/60 border-b border-border text-xs uppercase tracking-wide text-muted-foreground"
+            style={{ fontFamily: 'var(--font-mono)' }}
+          >
+            <span>name</span>
+            <span>stack</span>
+            <span>uploaded</span>
+            <span className="text-right">repo</span>
           </div>
 
           {projects.map((project, index) => (
@@ -65,11 +70,17 @@ export function Timeline({ onOpenProject }: TimelineProps) {
                 {project.title}
               </button>
 
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {project.technologies.join(' • ')}
+              <p
+                className="text-sm text-muted-foreground leading-relaxed"
+                style={{ fontFamily: 'var(--font-mono)' }}
+              >
+                {project.technologies.join(' · ')}
               </p>
 
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p
+                className="text-sm text-muted-foreground leading-relaxed"
+                style={{ fontFamily: 'var(--font-mono)' }}
+              >
                 {uploadDateFormatter.format(new Date(project.uploadedAt))}
               </p>
 
@@ -78,14 +89,18 @@ export function Timeline({ onOpenProject }: TimelineProps) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 justify-start md:justify-end text-sm text-primary hover:text-primary/80 transition-colors"
+                  className="inline-flex items-center gap-1.5 justify-start md:justify-end text-sm hover:opacity-80 transition-opacity"
+                  style={{ fontFamily: 'var(--font-mono)', color: 'var(--term-cyan)' }}
                 >
-                  <span>View Repo</span>
+                  <span>git clone</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               ) : (
-                <span className="text-sm text-muted-foreground justify-self-start md:justify-self-end">
-                  No repo yet
+                <span
+                  className="text-sm text-muted-foreground justify-self-start md:justify-self-end"
+                  style={{ fontFamily: 'var(--font-mono)' }}
+                >
+                  no repo yet
                 </span>
               )}
             </div>
