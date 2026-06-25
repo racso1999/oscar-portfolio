@@ -110,23 +110,24 @@ export function About() {
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                At my core, I am a creative who loves to build things. My path into computer science is
-                anything but conventional, and that is something I consider an advantage.
+                Fundamentally, I am a creative. I feel most comfortable in this strange existence when I
+                am presented with a problem and tasked with finding an efficient solution. There is
+                something deeply satisfying about producing something physical that has purpose and
+                fittingly, it gives me a purpose.
               </p>
               <p>
-                I spent three years studying Biology at the University of Bristol, where I developed a
-                deep fascination with the elegance of biological systems and the logic that underpins
-                them. That curiosity naturally evolved into a passion for algorithms and computation.
-                The leap from biological systems to computer systems turned out to be a smaller one
-                than most people expect; both are fundamentally about structure, relationships, and
-                emergent complexity.
+                My academic journey, however, began a couple of fields over. I spent three years
+                studying Biology at the University of Bristol, where I developed a deep fascination with
+                the elegance of biological systems and the logic that underpins them. That curiosity
+                naturally evolved into a passion for algorithms and computation.
               </p>
               <p>
-                I am now studying for an MSc in Computer Science at the University of Exeter, where I
-                am turning that interdisciplinary foundation into practical engineering skill. My
-                projects span Python, SQL, algorithms, and machine learning, and reflect the way I
-                approach problems generally: with curiosity, a desire to understand things from first
-                principles, and an instinct to build something real.
+                Eventually, I made the leap and, with 1000 programming hours and a bit of a struggle, I
+                managed to squeeze myself into the tech world.
+              </p>
+              <p>
+                I am now finishing my research thesis at the University of Exeter, which will see the
+                completion of my MSc in Computer Science.
               </p>
             </div>
 
