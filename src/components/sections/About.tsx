@@ -112,7 +112,7 @@ export function About() {
               <p>
                 Fundamentally, I am a creative. I feel most comfortable in this strange existence when I
                 am presented with a problem and tasked with finding an efficient solution. There is
-                something deeply satisfying about producing something physical that has purpose and
+                something deeply satisfying about producing something physical that has purpose — and
                 fittingly, it gives me a purpose.
               </p>
               <p>
