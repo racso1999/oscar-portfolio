@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="glow" cx="22%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#1a1320" />
+      <stop offset="60%" stop-color="#0a070d" />
+      <stop offset="100%" stop-color="#000000" />
+    </radialGradient>
+  </defs>
+
+  <!-- Full square background (black) -->
+  <rect width="1200" height="1200" fill="#000000" />
+
+  <!-- Card centered vertically (top/bottom 285px bands are black) -->
+  <g transform="translate(0,285)">
+    <!-- Card region 1200x630 -->
+    <rect width="1200" height="630" fill="url(#glow)" />
+
+    <!-- Subtle inner frame -->
+    <rect x="24" y="24" width="1152" height="582" rx="14"
+          fill="none" stroke="#2a2233" stroke-width="2" />
+
+    <!-- Window dots (terminal chrome) -->
+    <circle cx="72" cy="74" r="7" fill="#b48ead" />
+    <circle cx="98" cy="74" r="7" fill="#3a3340" />
+    <circle cx="124" cy="74" r="7" fill="#3a3340" />
+
+    <!-- Monogram top-right -->
+    <text x="1120" y="86" text-anchor="end"
+          font-family="Menlo, 'SF Mono', monospace" font-size="34" fill="#cccccc">[ OJ ]</text>
+
+    <!-- Prompt line -->
+    <text x="80" y="200" font-family="Menlo, 'SF Mono', monospace" font-size="30">
+      <tspan fill="#cccccc">~/</tspan><tspan fill="#b48ead">oscar-jones</tspan><tspan fill="#7a7a7a"> $ </tspan><tspan fill="#ffffff">whoami</tspan>
+    </text>
+
+    <!-- Name -->
+    <text x="78" y="350" font-family="Georgia, 'Times New Roman', serif"
+          font-size="110" font-weight="700" fill="#ffffff" letter-spacing="-2">Oscar Jones</text>
+
+    <!-- Tagline -->
+    <text x="82" y="438" font-family="Menlo, 'SF Mono', monospace" font-size="40" fill="#b48ead">
+      focus: Agentic Engineering<tspan dx="8" font-size="40">&#9608;</tspan>
+    </text>
+
+    <!-- Footer URL -->
+    <text x="80" y="560" font-family="Menlo, 'SF Mono', monospace" font-size="26" fill="#7a7a7a">oscarjones.space</text>
+  </g>
+</svg>
