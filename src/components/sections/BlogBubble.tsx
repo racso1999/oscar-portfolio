@@ -61,7 +61,16 @@ export function BlogBubble({ onNavigate }: BlogBubbleProps) {
               }}
             >
               <div className="flex items-center justify-between border-b border-border px-5 py-3">
-                <Prompt path="~/blog" command="cat" arg="latest.md" />
+                <Prompt
+                  path={
+                    <>
+                      <span style={{ color: '#cccccc' }}>~/</span>
+                      <span style={{ color: '#ffffff' }}>blog</span>
+                    </>
+                  }
+                  command="cat"
+                  arg="latest.md"
+                />
                 <span
                   className="text-xs text-muted-foreground"
                   style={{ fontFamily: 'var(--font-mono)' }}

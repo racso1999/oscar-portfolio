@@ -90,7 +90,7 @@ export function Timeline({ onOpenProject }: TimelineProps) {
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 justify-start md:justify-end text-sm hover:opacity-80 transition-opacity"
-                  style={{ fontFamily: 'var(--font-mono)', color: 'var(--term-cyan)' }}
+                  style={{ fontFamily: 'var(--font-mono)', color: '#cccccc' }}
                 >
                   <span>git clone</span>
                   <ArrowUpRight className="w-4 h-4" />

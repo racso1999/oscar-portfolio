@@ -20,11 +20,11 @@ pre[class*='language-'] .token {
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 7%;
+    --card: 270 16% 12%;
     --card-foreground: 0 0% 100%;
-    --popover: 0 0% 7%;
+    --popover: 270 16% 12%;
     --popover-foreground: 0 0% 100%;
     --primary: 0 0% 90%;
     --primary-foreground: 0 0% 100%;
@@ -42,12 +42,12 @@ pre[class*='language-'] .token {
     --radius: 0.5rem;
 
     /* Terminal syntax palette — the "machine voice" of the site */
-    --term-green: #7fb069;
+    --term-green: #b48ead;
     --term-pink: #e06c9f;
     --term-amber: #d9a05b;
     --term-cyan: #56b6c2;
     --term-comment: #7a7a7a;
-    --term-add-bg: rgba(127, 176, 105, 0.12);
+    --term-add-bg: rgba(180, 142, 173, 0.12);
     --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo,
       Consolas, monospace;
   }

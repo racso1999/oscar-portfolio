@@ -1,6 +1,10 @@
+import { type ReactNode } from 'react';
+
 interface PromptProps {
   /** The working-directory portion, e.g. "~/about". Rendered in terminal green. */
-  path?: string;
+  path?: ReactNode;
+  /** Override the path colour (defaults to terminal green). */
+  pathColor?: string;
   /** The command itself, e.g. "whoami". Rendered in the foreground. */
   command: string;
   /** Optional trailing argument / flag, rendered in comment grey. */
@@ -16,6 +20,7 @@ interface PromptProps {
  */
 export function Prompt({
   path = '~',
+  pathColor = 'var(--term-green)',
   command,
   arg,
   caret = false,
@@ -26,7 +31,7 @@ export function Prompt({
       className={`font-mono text-xs md:text-sm tracking-tight ${className}`}
       style={{ fontFamily: 'var(--font-mono)' }}
     >
-      <span style={{ color: 'var(--term-green)' }}>{path}</span>
+      <span style={{ color: pathColor }}>{path}</span>
       <span style={{ color: 'var(--term-comment)' }}> $ </span>
       <span className={`text-foreground ${caret ? 'term-caret' : ''}`}>
         {command}

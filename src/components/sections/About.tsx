@@ -66,15 +66,15 @@ export function About() {
                     className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground mb-2"
                     style={{ fontFamily: 'var(--font-mono)' }}
                   >
-                    <MapPin className="w-4 h-4" style={{ color: 'var(--term-green)' }} />
+                    <MapPin className="w-4 h-4" style={{ color: '#ffffff' }} />
                     <span>location: UK</span>
                   </div>
                   <div
                     className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground"
                     style={{ fontFamily: 'var(--font-mono)' }}
                   >
-                    <Briefcase className="w-4 h-4" style={{ color: 'var(--term-green)' }} />
-                    <span>focus: Systems Engineering &amp; AI</span>
+                    <Briefcase className="w-4 h-4" style={{ color: '#ffffff' }} />
+                    <span>focus: Agentic Engineering</span>
                   </div>
                 </div>
               </div>

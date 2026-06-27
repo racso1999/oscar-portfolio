@@ -98,7 +98,7 @@ function App() {
         style={{
           opacity: isLoaded ? 1 : 0,
           transform: isLoaded ? 'translateY(0)' : 'translateY(-100%)',
-          background: 'rgba(5, 5, 5, 0.8)',
+          background: '#000000',
           backdropFilter: 'blur(10px)',
         }}
       >
@@ -116,7 +116,7 @@ function App() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              <span style={{ color: 'var(--term-green)' }}>~</span>
+              <span style={{ color: '#cccccc' }}>~</span>
               <span style={{ color: 'var(--term-comment)' }}>/</span>oscar-jones
             </a>
 

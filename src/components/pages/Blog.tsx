@@ -9,7 +9,17 @@ export function Blog({ onNavigate }: BlogProps) {
   return (
     <section className="pt-24 pb-16 md:pt-28 md:pb-20">
       <div className="max-w-3xl mx-auto px-4">
-        <Prompt path="~/blog" command="ls" caret className="mb-3" />
+        <Prompt
+          path={
+            <>
+              <span style={{ color: '#cccccc' }}>~/</span>
+              <span style={{ color: '#ffffff' }}>blog</span>
+            </>
+          }
+          command="ls"
+          caret
+          className="mb-3"
+        />
         <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-14">
           Writing
         </h1>
