@@ -9,22 +9,24 @@ export interface BlogPost {
 // Source of truth — keep sorted newest-first so both the bubble and /blog page agree
 export const blogPosts: BlogPost[] = [
   {
-    title: 'Research Update',
+    title: 'Research Log',
     slug: 'research-update-local-ollama-linux',
     date: '2026-06-30',
     excerpt:
-      'Running a local Ollama model on the Linux machine — far too slow, concurrency pinned to 1 by VRAM, now pricing up Gemini 3 Flash Lite.',
-    body: `Got a local Ollama model running on the Linux machine for CooperBench. Verdict: it takes far too long. The big constraint is VRAM — there simply isn't enough headroom to run more than one model instance at a time, so concurrency has to be pinned to 1. That kills throughput on the benchmark, since each task waits its turn instead of running in parallel.
+      'Tested three CooperBench backends for cost and speed. All three fell short: Claude wrapper too expensive, local LLM too slow, Gemini API too expensive.',
+    body: `## What we did
 
-Local was always going to be a trade-off between cost and speed, and right now speed is losing badly. So I'm now testing the cost of Gemini 3 Flash Lite as a hosted alternative — cheap, fast, and no VRAM ceiling to fight. Stay tuned for the numbers.`,
-  },
-  {
-    title: 'Research Log',
-    slug: 'research-log-phase-1-coordination-gap',
-    date: '2026-06-30',
-    excerpt:
-      'Phase 1: testing whether two communicating agents underperform a single agent on the CooperBench flash subset — solo vs coop.',
-    body: `## Phase 1 — Coordination gap: solo vs 2-agent coop (flash subset)
+Ran CooperBench across three model backends to find a workable cost and speed setup. Tested the Claude wrapper, a local LLM on the RTX 4070, and the Gemini API.
+
+## What went wrong
+
+None of the three are viable yet. The Claude wrapper is too expensive, burning a full session token allowance in a single run. The local LLM is too slow, with concurrency stuck at 1 due to VRAM limits. The Gemini API is also too expensive. One full run lands around £15 to £20.
+
+## What's next
+
+Find a cheaper or faster backend that can sustain a full 50 set run without blowing the budget, then move on to testing context protocols between agents.
+
+## Phase 1 — Coordination gap: solo vs 2-agent coop (flash subset)
 
 Hypothesis: Splitting a task across two communicating agents underperforms a single agent doing the whole task (CooperBench coordination deficit).
 
@@ -82,7 +84,7 @@ uv run cooperbench run -n flash-coop -s flash \\
 - One full run burns through nearly 100% of the session limit on the max plan.`,
   },
   {
-    title: 'Research Update',
+    title: 'Research Log',
     slug: 'research-update-2026-06-27',
     date: '2026-06-27',
     excerpt:
