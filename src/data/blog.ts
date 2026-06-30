@@ -9,6 +9,67 @@ export interface BlogPost {
 // Source of truth — keep sorted newest-first so both the bubble and /blog page agree
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Research Log',
+    slug: 'research-log-phase-1-coordination-gap',
+    date: '2026-06-30',
+    excerpt:
+      'Phase 1: testing whether two communicating agents underperform a single agent on the CooperBench flash subset — solo vs coop.',
+    body: `## Phase 1 — Coordination gap: solo vs 2-agent coop (flash subset)
+
+**Date:** 2026-06-30
+
+**Hypothesis:** Splitting a task across two communicating agents underperforms a single agent doing the whole task (CooperBench coordination deficit).
+
+## Setup
+
+- Dataset: flash subset — 50 feature pairs, 20 tasks, 11 repos (seed=42, sampled from lite).
+- Agent: claude_code (Claude Code CLI), model claude-sonnet-4-6, billed via Claude Max subscription (OAuth token auto-read from ~/.claude/.credentials.json).
+- Backend: local Docker, amd64 task images prebuilt locally.
+- Only variable across conditions: --setting. No --git (isolates messaging as the sole coordination channel).
+
+## Conditions
+
+- flash-solo — 1 agent implements both features.
+- flash-coop — 2 agents (one feature each), freeform Redis messaging ON (default).
+
+## Commands
+
+\`\`\`bash
+cd /home/oscar/CooperBench
+docker run -d -p 6379:6379 --name cb-redis redis:7   # message bus (required for coop)
+
+# Solo: one agent does both features
+uv run cooperbench run -n flash-solo -s flash \\
+  -a claude_code -m claude-sonnet-4-6 --setting solo -c 8
+
+# Coop: two agents, one feature each, messaging on
+uv run cooperbench run -n flash-coop -s flash \\
+  -a claude_code -m claude-sonnet-4-6 --setting coop -c 8
+\`\`\`
+
+## Flag meaning
+
+- -n — experiment name → logs/<name>/
+- -s flash — 50-pair subset (fixed seed → both conditions see identical pairs)
+- -a claude_code -m claude-sonnet-4-6 — Claude wrapper, Sonnet 4.6
+- --setting solo|coop — single agent vs 2 communicating agents
+- -c 8 — tasks in parallel (solo: 8 containers; coop: 8×2 = 16)
+
+## Scoring
+
+- Solo: single patch tested against both feature suites (test_solo).
+- Coop: the two agents' patches are auto-merged, then both suites run on the merged tree (test_merged); merge conflicts recorded.
+- Primary metric: both_passed rate per pair. Secondary (coop): merge-conflict rate.
+- Auto-eval runs after each; results in logs/<name>/summary.json and per-pair eval.json.
+- Gap = both_passed(solo) − both_passed(coop).
+
+## Notes
+
+- Run solo first, then coop (RAM headroom; coop doubles container count).
+- Redis required for coop only; harmless for solo.
+- --force to re-run over existing results.`,
+  },
+  {
     title: 'Research Update',
     slug: 'research-update-2026-06-27',
     date: '2026-06-27',
