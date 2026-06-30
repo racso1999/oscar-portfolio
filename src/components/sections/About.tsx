@@ -27,7 +27,7 @@ export function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-24"
+      className="relative pt-28 md:pt-36 pb-20 md:pb-24"
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">

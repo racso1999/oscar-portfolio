@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Timeline } from './components/sections/Timeline';
 import { About } from './components/sections/About';
+import { LeetCodeHeatmap } from './components/sections/LeetCodeHeatmap';
 import { Contact } from './components/sections/Contact';
 import { ProjectDetail } from './components/pages/ProjectDetail';
 import { BlogBubble } from './components/sections/BlogBubble';
@@ -125,8 +126,9 @@ function App() {
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               {[
-                { href: '#work', label: 'work' },
+                { href: '#work', label: 'projects' },
                 { href: '#blog', label: 'blog' },
+                { href: '#leetcode', label: 'leetcode' },
                 { href: '#about', label: 'about' },
               ].map((item) => (
                 <a
@@ -158,6 +160,10 @@ function App() {
           <>
             <section id="about">
               <About />
+            </section>
+
+            <section id="leetcode" className="scroll-mt-20">
+              <LeetCodeHeatmap />
             </section>
 
             <section id="blog" className="scroll-mt-20">
