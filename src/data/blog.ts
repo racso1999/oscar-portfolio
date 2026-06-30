@@ -65,7 +65,11 @@ uv run cooperbench run -n flash-coop -s flash \\
 
 - Run solo first, then coop (RAM headroom; coop doubles container count).
 - Redis required for coop only; harmless for solo.
-- --force to re-run over existing results.`,
+- --force to re-run over existing results.
+
+## Results — Claude runs
+
+- One full run burns through nearly 100% of the session limit on the max plan.`,
   },
   {
     title: 'Research Update',
