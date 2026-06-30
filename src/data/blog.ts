@@ -16,9 +16,7 @@ export const blogPosts: BlogPost[] = [
       'Phase 1: testing whether two communicating agents underperform a single agent on the CooperBench flash subset — solo vs coop.',
     body: `## Phase 1 — Coordination gap: solo vs 2-agent coop (flash subset)
 
-**Date:** 2026-06-30
-
-**Hypothesis:** Splitting a task across two communicating agents underperforms a single agent doing the whole task (CooperBench coordination deficit).
+Hypothesis: Splitting a task across two communicating agents underperforms a single agent doing the whole task (CooperBench coordination deficit).
 
 ## Setup
 

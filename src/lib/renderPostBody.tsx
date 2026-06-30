@@ -37,10 +37,7 @@ export function renderPostBody(
 
         if (block.startsWith('## ')) {
           return (
-            <h3
-              key={key}
-              className="text-xl md:text-2xl font-bold text-foreground pt-2"
-            >
+            <h3 key={key} className={`font-bold ${textClassName}`}>
               {block.slice(3)}
             </h3>
           );
