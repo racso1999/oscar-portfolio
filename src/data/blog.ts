@@ -9,6 +9,16 @@ export interface BlogPost {
 // Source of truth — keep sorted newest-first so both the bubble and /blog page agree
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Research Update',
+    slug: 'research-update-local-ollama-linux',
+    date: '2026-06-30',
+    excerpt:
+      'Running a local Ollama model on the Linux machine — far too slow, concurrency pinned to 1 by VRAM, now pricing up Gemini 3 Flash Lite.',
+    body: `Got a local Ollama model running on the Linux machine for CooperBench. Verdict: it takes far too long. The big constraint is VRAM — there simply isn't enough headroom to run more than one model instance at a time, so concurrency has to be pinned to 1. That kills throughput on the benchmark, since each task waits its turn instead of running in parallel.
+
+Local was always going to be a trade-off between cost and speed, and right now speed is losing badly. So I'm now testing the cost of Gemini 3 Flash Lite as a hosted alternative — cheap, fast, and no VRAM ceiling to fight. Stay tuned for the numbers.`,
+  },
+  {
     title: 'Research Log',
     slug: 'research-log-phase-1-coordination-gap',
     date: '2026-06-30',
