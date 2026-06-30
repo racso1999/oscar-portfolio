@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { blogPosts } from '../../data/blog';
 import { Prompt } from '../term/Prompt';
+import { renderPostBody } from '../../lib/renderPostBody';
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
@@ -92,11 +93,9 @@ export function BlogBubble({ onNavigate }: BlogBubbleProps) {
                     {post.title}
                   </p>
                   <div className="space-y-3">
-                    {post.body.split('\n\n').map((paragraph, i) => (
-                      <p key={i} className="text-base text-muted-foreground leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
+                    {renderPostBody(post.body, {
+                      textClassName: 'text-base text-muted-foreground',
+                    })}
                   </div>
                 </div>
               ))}
