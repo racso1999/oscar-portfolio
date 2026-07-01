@@ -1,6 +1,7 @@
 import droneVideo from '../assets/drone.mov';
 import cropDatabasePdf from '../assets/crop-data-sql-database.pdf';
 import applioUmlImage from '../assets/applio-uml.svg';
+import dartmoorCampingImage from '../assets/dartmoor-camping.png';
 
 export interface Project {
   title: string;
@@ -27,6 +28,24 @@ export const projects: Project[] = [
   //   videoUrl: optional,
   //   pdfUrl: optional,
   // },
+  {
+    title: 'Dartmoor Wild Camping Checker',
+    slug: 'dartmoor-wild-camping-checker',
+    description:
+      'A small web app that overlays Dartmoor National Park\'s permitted backpack-camping areas on a map and lets you check whether any location falls inside one. Dartmoor is the only place in England with a legal right to wild ("backpack") camp, but only within specific permitted areas, so this tool bakes in the official polygon data to instantly show "camping permitted" vs "not permitted". You can search by place name or coordinates via a free OSM Nominatim geocoder, use your browser location, or just click anywhere on the map to test a point. Under the hood it runs a correct point-in-polygon test that handles MultiPolygons and holes (excluded pockets inside a permitted area), with the boundary data snapshotted from Dartmoor National Park Authority\'s open ArcGIS data.',
+    uploadedAt: '2026-07-01',
+    technologies: [
+      'JavaScript',
+      'Leaflet',
+      'OpenStreetMap',
+      'GeoJSON',
+      'Nominatim Geocoding',
+      'HTML',
+      'CSS',
+    ],
+    githubUrl: 'https://github.com/racso1999/Dartmoor-Camping',
+    imageUrl: dartmoorCampingImage,
+  },
   {
     title: 'Jobe',
     slug: 'jobe',
