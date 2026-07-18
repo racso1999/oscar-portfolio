@@ -10,6 +10,34 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     title: 'Research Log',
+    slug: 'the-curse-of-coordination-reproduced',
+    date: '2026-07-18',
+    excerpt:
+      'Reproduced CooperBench’s coordination gap: pass rate fell 3.6x from solo to two messaging agents, and every joint failure was a merge conflict, not broken code.',
+    body: `## The Curse of Coordination, Reproduced
+
+This week: replication.
+
+We're testing why multi-agent coding systems underperform solo ones. Our bet is the communication efficiency problem: split a compute budget across agents and coordination eats the difference.
+
+This week's goal was to reproduce CooperBench's coordination gap on our own setup. We ran its 50-pair "flash" subset with Claude Sonnet 5, comparing solo (one agent, both features) against cooperative (two agents, one feature each, free-text messaging), paired at the pair level. About 47 pairs were usable.
+
+## Results
+
+Pass rate fell from 44.2% solo to 12.3% with messaging, a 3.6x gap. Cost efficiency fell further, from 0.675 to 0.107 passes per dollar, a 6.3x gap. Both differences are significant (Wilcoxon, p < .001). So the gap reproduced, and once cost is counted it nearly doubles.
+
+## What we found
+
+The failure isn't capability, it's integration. Agents passed their own test suite just as often as solo (21/47 vs 20/47), but of 20 solo-solvable pairs, cooperation delivered only 5. Every joint failure was a textual merge conflict, not broken code. The coordination gap is really an integration gap.
+
+## Next: scaling
+
+We're now varying only team size (N from 1 to 4) on a fixed workload, splitting each agent's tokens into context, task, communication, and rework to ask one question: is coordination cost superlinear in N? Results in a future update.
+
+Built on CooperBench (Khatua et al., 2026) and Fu et al. (2026).`,
+  },
+  {
+    title: 'Research Log',
     slug: 'research-update-local-ollama-linux',
     date: '2026-06-30',
     excerpt:
