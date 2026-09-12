@@ -9,6 +9,18 @@ export interface BlogPost {
 // Source of truth — keep sorted newest-first so both the bubble and /blog page agree
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Weekly Review - 12-09-26',
+    slug: 'weekly-review-2026-09-12',
+    date: '2026-09-12',
+    excerpt:
+      'China’s done, university’s done, and the new routine is two hours of DSA and an hour of job applications a day — plus a finances tracker that plugs into my banking app.',
+    body: `China was a blast. University is done. And now sat back in front of my MacBook.
+
+Two hours of data structures and algorithms daily, one hour of job applications. Let's see how long it takes me to get a role.
+
+I'm also working on another full stack app to prepare me for work. I'm building a simple finances tracker, that plugs into my banking app.`,
+  },
+  {
     title: 'Research Log',
     slug: 'the-curse-of-coordination-reproduced',
     date: '2026-07-18',
