@@ -9,6 +9,18 @@ export interface BlogPost {
 // Source of truth — keep sorted newest-first so both the bubble and /blog page agree
 export const blogPosts: BlogPost[] = [
   {
+    title: 'Graduated with Distinction',
+    slug: 'graduated-with-distinction',
+    date: '2026-11-02',
+    excerpt:
+      'Finished Computer Science with a distinction while juggling a part-time job and the DataSoc presidency — next up, rebuilding Jobe from scratch.',
+    body: `I’m incredibly pleased to announce that I have received a distinction for my studies in Computer Science! Balancing the demands of a part-time job, presidency of DataSoc and my degree was quite tricky at times and certainly took some doing, but it’s made it all the more satisfying now it’s finished.
+
+The main thing to take away from the degree was perhaps the experience I got from working with other engineers. I met some great people along the way, some of whom were always happy to help me understand some new tech or just chat about problem solving.
+
+I’m spending my time now solidifying my skills with some projects. I’ve decided to rebuild Jobe from scratch, and I’m hoping to have something testable by the end of November. I’m incredibly excited for the future and can’t wait to see what I can build next. Stay tuned.`,
+  },
+  {
     title: 'Weekly Review - 12-09-26',
     slug: 'weekly-review-2026-09-12',
     date: '2026-09-12',
