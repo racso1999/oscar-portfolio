@@ -126,8 +126,8 @@ export function About() {
                 managed to squeeze myself into the tech world.
               </p>
               <p>
-                I am now finishing my research thesis at the University of Exeter, which will see the
-                completion of my MSc in Computer Science.
+                I have now completed my MSc in Computer Science at the University of Exeter,
+                achieving a distinction.
               </p>
             </div>
 
